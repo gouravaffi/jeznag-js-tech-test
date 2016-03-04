@@ -99,6 +99,14 @@ console.log(emailParseUtil);
         expect.end();
     });
 
+    test('Signature parser should correctly handle longer paragraphs', function (expect) {
+        const originalEmail = `<td><div dir="ltr">Can you advise whether this has been done?</div><div><br clear="all"><div dir="ltr">The client is hoping to have it done by Tuesday.</div>`;
+        const expectedOutput = 'Can you advise whether this has been done?\nThe client is hoping to have it done by Tuesday.';
+        let actualOutput = emailParseUtil.removeQuotedTextFromEmail(originalEmail);
+        expect.equal(actualOutput, expectedOutput);
+        expect.end();
+    });
+
     test('Cherie example', function (expect) {
         const originalEmail = `Hi Cherie,
  
